@@ -3,6 +3,8 @@ project(MPCC)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-O2")
+# set(CMAKE_CXX_FLAGS "-g -O0 -Wall -Wextra")
+
 
 include_directories(.)
 include_directories(External/blasfeo/lib/include)
@@ -36,8 +38,10 @@ add_executable(MPCC
         Plotting/plotting.cpp
         Plotting/plotting.h)
 
-find_package(Python COMPONENTS Development)
-target_include_directories(MPCC PRIVATE ${Python_INCLUDE_DIRS})
-target_link_libraries(MPCC ${Python_LIBRARIES})
+find_package(Python2 COMPONENTS Development)
+message("Python2 include dirs:" ${Python2_INCLUDE_DIRS})
+message("Python2 lib dirs:" ${Python2_LIBRARIES})
+target_include_directories(MPCC PRIVATE ${Python2_INCLUDE_DIRS})
+target_link_libraries(MPCC ${Python2_LIBRARIES})
 
 target_link_libraries(MPCC ${CMAKE_SOURCE_DIR}/External/hpipm/lib/lib/libhpipm.a ${CMAKE_SOURCE_DIR}/External/blasfeo/lib/lib/libblasfeo.a m)
